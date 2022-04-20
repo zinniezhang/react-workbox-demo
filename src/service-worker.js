@@ -11,7 +11,9 @@ import { clientsClaim } from 'workbox-core';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
-import { StaleWhileRevalidate } from 'workbox-strategies';
+import { StaleWhileRevalidate, CacheFirst} from 'workbox-strategies';
+import {CacheableResponsePlugin} from 'workbox-cacheable-response';
+
 
 clientsClaim();
 
@@ -70,3 +72,52 @@ self.addEventListener('message', (event) => {
 });
 
 // Any other custom service worker logic can go here.
+console.log('Hello from service-worker.js');
+
+//https://api.themoviedb.org/3/discover/tv?sort_by=popularity.desc&api_key=23b2268f768ece0bfc73690051ee08da
+registerRoute(
+  // Add in any other file extensions or routing criteria as needed.
+  ({ url }) => url.origin === "https://api.themoviedb.org" || url.pathname === "/3/discover/tv", // Customize this strategy as needed, e.g., by changing to CacheFirst.
+  new StaleWhileRevalidate({
+    cacheName: 'movie-api-response',
+    plugins: [
+      new CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+      new ExpirationPlugin({maxEntries: 1}), // Will cache maximum 1 requests.
+    
+    ],
+  })
+);
+
+registerRoute(
+  // Add in any other file extensions or routing criteria as needed.
+  ({ url }) => url.origin === "https://api.themoviedb.org" || url.pathname === "/3/discover/tv", // Customize this strategy as needed, e.g., by changing to CacheFirst.
+  new StaleWhileRevalidate({
+    cacheName: 'movie-api-response',
+    plugins: [
+      new CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+      new ExpirationPlugin({maxEntries: 1}), // Will cache maximum 1 requests.
+    
+    ],
+  })
+);
+
+registerRoute(
+  ({request}) => request.destination === 'image',
+  new CacheFirst({
+    cacheName: 'images',
+    plugins: [
+      new CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+      new ExpirationPlugin({
+        maxEntries: 60,
+        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
+      }),
+    ],
+  }),
+);
+
