@@ -77,7 +77,8 @@ function App() {
   );
 }
 ```
-5. Now register a route to cache 3rd party API calls. Add the below code to service-worker.js. You can refer to (https://developers.google.com/web/tools/workbox).
+5. Now register a route to cache 3rd party API calls. Add the below code to service-worker.js. You can refer to (https://developers.google.com/web/tools/workbox). 
+** You may need to npm install the plugins
 
 ```javascript
 //https://api.themoviedb.org/3/discover/tv?sort_by=popularity.desc&api_key=23b2268f768ece0bfc73690051ee08da
@@ -98,6 +99,7 @@ registerRoute(
 ```
 
 6. Now register a route to cache all images. Add the below code to service-worker.js.You can refer to (https://developers.google.com/web/tools/workbox).
+** You may need to npm install the plugins
 ```javascript
 registerRoute(
   ({request}) => request.destination === 'image',
