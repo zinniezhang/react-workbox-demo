@@ -95,9 +95,10 @@ registerRoute(
     ],
   })
 );
+```
 
 6. Now register a route to cache all images. Add the below code to service-worker.js.You can refer to (https://developers.google.com/web/tools/workbox).
-
+```javascript
 registerRoute(
   ({request}) => request.destination === 'image',
   new CacheFirst({
