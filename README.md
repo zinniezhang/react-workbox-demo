@@ -117,7 +117,7 @@ registerRoute(
   }),
 );
 ```
-7. Turn off your wifi and reload your site. Voila! It should still render. 
+7. Build and run in production mode. Turn off your wifi and reload your site. Voila! It should still render. 
 
 References:
 1. https://blog.logrocket.com/setting-up-a-pwa-with-service-workers-and-create-react-app/
