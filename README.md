@@ -21,7 +21,7 @@ serviceWorkerRegistration.register();
 ```javascript
 console.log('Hello from service-worker.js');
 ```
-Go to your web app. Inspect => Application => Service Worker
+Must build and run in production mode. Go to your web app. Inspect => Application => Service Worker
 
 4. Make simple UI + API calls (to https://www.themoviedb.org/documentation/api) to list most popular movies. Use the below Movie component. I used axios (run "npm install axios")
 
