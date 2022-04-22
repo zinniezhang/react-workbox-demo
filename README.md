@@ -15,7 +15,7 @@ serviceWorkerRegistration.unregister();
 ```
 Change to 
 ```javascript
-serviceWorkerRegistration.unregister();
+serviceWorkerRegistration.register();
 ```
 3. Check your service worker is registered. Add the code below to src/service-worker.js:
 ```javascript
