@@ -78,7 +78,11 @@ function App() {
 }
 ```
 5. Now register a route to cache 3rd party API calls. Add the below code to service-worker.js. You can refer to (https://developers.google.com/web/tools/workbox). 
-** You may need to npm install the plugins
+** You need to npm install the plugins.
+```javascript
+# include this import statement
+import {CacheableResponsePlugin} from 'workbox-cacheable-response';
+```
 
 ```javascript
 //https://api.themoviedb.org/3/discover/tv?sort_by=popularity.desc&api_key=23b2268f768ece0bfc73690051ee08da
